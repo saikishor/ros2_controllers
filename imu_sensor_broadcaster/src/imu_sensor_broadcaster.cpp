@@ -27,8 +27,7 @@ controller_interface::CallbackReturn IMUSensorBroadcaster::on_init()
 {
   try
   {
-    param_listener_ = std::make_shared<ParamListener>(get_node());
-    params_ = param_listener_->get_params();
+    param_listener_ = std::make_shared<ParamListener>(get_node(), "", false);
   }
   catch (const std::exception & e)
   {
@@ -43,6 +42,10 @@ controller_interface::CallbackReturn IMUSensorBroadcaster::on_init()
 controller_interface::CallbackReturn IMUSensorBroadcaster::on_configure(
   const rclcpp_lifecycle::State & /*previous_state*/)
 {
+  if (!param_listener_->are_params_initialized())
+  {
+    param_listener_->initialize_parameters();
+  }
   params_ = param_listener_->get_params();
 
   imu_sensor_ = std::make_unique<semantic_components::IMUSensor>(
