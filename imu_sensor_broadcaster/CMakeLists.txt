@@ -54,7 +54,7 @@ if(BUILD_TESTING)
 
   add_rostest_with_parameters_gmock(test_load_imu_sensor_broadcaster
     test/test_load_imu_sensor_broadcaster.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/test/imu_sensor_broadcaster_params.yaml)
+    ${CMAKE_CURRENT_SOURCE_DIR}/test/imu_sensor_broadcaster_no_params.yaml)
   target_include_directories(test_load_imu_sensor_broadcaster PRIVATE include)
   target_link_libraries(test_load_imu_sensor_broadcaster
     imu_sensor_broadcaster
